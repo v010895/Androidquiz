@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">androidquiz</string>
+    <string name="login_title">Login:</string>
+    <string name="site_admin">Site_Admin</string>
+</resources>

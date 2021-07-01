@@ -1,0 +1,42 @@
+package com.project.androidquiz.api
+
+import com.project.androidquiz.models.Users
+import com.project.androidquiz.tools.DebugLog
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface GithubService {
+
+    @GET("users")
+    fun listAllUsers(
+        @Query("since") since: Int,
+        @Query("per_page") perPage: Int
+    ): Call<List<Users>>
+
+    companion object {
+        private const val BASE_URL = "https://api.github.com"
+        fun create(): GithubService {
+            val logger = HttpLoggingInterceptor {
+                DebugLog.d("GithubService", it)
+
+            }
+            val client = OkHttpClient.Builder()
+                .addInterceptor(logger)
+                .build()
+
+            return Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(GithubService::class.java)
+        }
+    }
+
+}
