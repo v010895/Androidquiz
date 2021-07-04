@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">androidquiz</string>
     <string name="login_title">Login:</string>
-    <string name="site_admin">Site_Admin</string>
+    <string name="site_admin">Site_Admin:</string>
+    <string name="add_favorite">Add Favorite</string>
+    <string name="to_favorite">To Favorite</string>
 </resources>

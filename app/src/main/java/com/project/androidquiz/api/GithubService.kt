@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GithubService {
@@ -18,7 +19,10 @@ interface GithubService {
         @Query("since") since: Int,
         @Query("per_page") perPage: Int
     ): Call<List<Users>>
-
+    @GET("users/{user}")
+    fun userDetail(
+        @Path("user") user:String,
+    ):Call<Users>
     companion object {
         private const val BASE_URL = "https://api.github.com"
         fun create(): GithubService {

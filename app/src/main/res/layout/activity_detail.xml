@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/avatarImage"
+        android:layout_width="@dimen/detail_image_size"
+        android:layout_height="@dimen/detail_image_size"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Name"
+        android:textSize="@dimen/extra_big_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarImage" />
+
+    <ImageView
+        android:id="@+id/loginImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:srcCompat="@drawable/ic_person" />
+
+    <TextView
+        android:id="@+id/loginTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/loginImage"
+        app:layout_constraintTop_toTopOf="@+id/loginImage"
+        tools:text="login" />
+
+    <TextView
+        android:id="@+id/bioTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:maxLines="3"
+        app:layout_constraintBottom_toBottomOf="@+id/loginImage"
+        app:layout_constraintStart_toEndOf="@+id/loginImage"
+        tools:text="bio" />
+
+    <ImageView
+        android:id="@+id/locationImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginImage"
+        app:srcCompat="@drawable/ic_location" />
+
+    <TextView
+        android:id="@+id/locationTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/locationImage"
+        app:layout_constraintStart_toEndOf="@+id/locationImage"
+        app:layout_constraintTop_toTopOf="@+id/locationImage"
+        tools:text="Location" />
+
+    <ImageView
+        android:id="@+id/blogImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationImage"
+        app:srcCompat="@drawable/ic_blog" />
+
+    <TextView
+        android:id="@+id/blogTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        tools:text="Blog"
+        app:layout_constraintBottom_toBottomOf="@+id/blogImage"
+        app:layout_constraintStart_toEndOf="@+id/blogImage"
+        app:layout_constraintTop_toTopOf="@+id/blogImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
