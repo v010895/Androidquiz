@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.project.androidquiz.adapters.GithubAdapter
 import com.project.androidquiz.databinding.ActivityMainBinding
+import com.project.androidquiz.interfaces.DbListener
 import com.project.androidquiz.models.Users
 import com.project.androidquiz.repositories.NetworkState
 import com.project.androidquiz.viewmodels.GithubViewModel
@@ -27,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         githubViewModel = ViewModelProvider(this,factory).get(GithubViewModel::class.java)
         githubViewModel.networkState.observe(this, Observer {
             when(it){
-                NetworkState.LOADED->Snackbar.make(binding.root,"LOADED",Snackbar.LENGTH_SHORT).show()
-                NetworkState.LOADING->Snackbar.make(binding.root,"LOADING",Snackbar.LENGTH_SHORT).show()
+                NetworkState.LOADED->Snackbar.make(binding.root,it.status.toString(),Snackbar.LENGTH_SHORT).show()
+                NetworkState.LOADING->Snackbar.make(binding.root,it.status.toString(),Snackbar.LENGTH_SHORT).show()
                 else->Snackbar.make(binding.root,it.msg?:"Unknown error",Snackbar.LENGTH_SHORT).show()
             }
 
@@ -45,12 +46,24 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId)
         {
-
+            R.id.to_favorite->{
+                val intent = Intent(this,FavoriteActivity::class.java)
+                startActivity(intent)
+            }
         }
         return true
     }
     private fun initAdapter(){
-        val adapter = GithubAdapter(this,binding.usersList){
+        val adapter = GithubAdapter(this,binding.usersList,object:DbListener{
+            override fun insertUser(user: Users) {
+                githubViewModel.insertUser(user)
+            }
+
+            override fun deleteUser(user: Users) {
+
+            }
+
+        }){
             val name = (it as Users).login
             val intent = Intent(this,DetailActivity::class.java).apply{
                 putExtra("name",name)

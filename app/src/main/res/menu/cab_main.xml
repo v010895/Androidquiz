@@ -6,4 +6,8 @@
         android:title="@string/add_favorite"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/delete_favorite"
+        android:title="Delete Favorite"
+        app:showAsAction="never"/>
 </menu>

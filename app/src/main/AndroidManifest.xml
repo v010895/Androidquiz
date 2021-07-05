@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Androidquiz">
         <activity android:name=".MainActivity"
-            android:label="Github Users">
+            android:label="@string/github_users">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +19,20 @@
         </activity>
         <activity android:name=".DetailActivity"
             android:parentActivityName=".MainActivity"
-            android:label="User Detail">
+            android:label="@string/user_detail">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".FavoriteActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/favorite_user">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

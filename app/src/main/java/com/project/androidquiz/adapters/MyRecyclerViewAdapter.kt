@@ -41,8 +41,8 @@ abstract class MyRecyclerViewAdapter(val activity:AppCompatActivity,val recycler
 
     abstract fun onActionModeDestroyed()
 
-    protected fun isOneItemSelected() = selectedKeys.size == 1
-
+    protected fun getSelectPos() = selectedKeys.firstOrNull()?:0
+    protected fun resetSelectedKeys() = selectedKeys.clear()
     init {
         actModeCallback = object : MyActionModeCallback() {
             override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
@@ -67,9 +67,9 @@ abstract class MyRecyclerViewAdapter(val activity:AppCompatActivity,val recycler
 
             override fun onDestroyActionMode(actionMode: ActionMode) {
                 isSelectable = false
-                (selectedKeys.clone() as HashSet<Int>).forEach {
-                    val position = it
-                    if (position != -1) {
+                (selectedKeys.clone() as HashSet<Int>).forEach {position->
+                    val item = getItem(position)
+                    if (item != null) {
                         toggleItemSelection(false, position)
                     }
                 }

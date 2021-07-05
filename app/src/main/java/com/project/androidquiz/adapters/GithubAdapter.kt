@@ -11,10 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.androidquiz.R
+import com.project.androidquiz.interfaces.DbListener
 import com.project.androidquiz.models.Users
 import org.w3c.dom.Text
 
-class GithubAdapter(activity:AppCompatActivity,recyclerView: RecyclerView,
+class GithubAdapter(activity:AppCompatActivity,recyclerView: RecyclerView,private val dbListener: DbListener,
                     itemClick:(Any)->Unit):MyRecyclerViewAdapter(activity,recyclerView,itemClick) {
 
 
@@ -23,14 +24,37 @@ class GithubAdapter(activity:AppCompatActivity,recyclerView: RecyclerView,
     }
 
     override fun prepareActionMode(menu: Menu) {
-
+            menu.apply{
+                findItem(R.id.add_favorite).isVisible = !this@GithubAdapter.getItem(getSelectPos())!!.isInDb
+                findItem(R.id.delete_favorite).isVisible = this@GithubAdapter.getItem(getSelectPos())!!.isInDb
+            }
     }
 
     override fun actionItemPressed(id: Int) {
         when(id)
         {
             R.id.add_favorite->{
-                //Todo
+                val user = getItem(getSelectPos())
+                if(user !=null) {
+                    val insertUser = Users(user.id,
+                        user.login,
+                        user.avatarUrl,
+                        user.siteAdmin,
+                        isInDb = true)
+                    dbListener.insertUser(insertUser)
+                }
+            }
+            R.id.delete_favorite->{
+                val user = getItem(getSelectPos())
+                if(user !=null) {
+                    val insertUser = Users(user.id,
+                        user.login,
+                        user.avatarUrl,
+                        user.siteAdmin,
+                        isInDb = true)
+                    resetSelectedKeys()
+                    dbListener.deleteUser(insertUser)
+                }
             }
 
         }
