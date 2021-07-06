@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.snackbar.Snackbar
 import com.project.androidquiz.adapters.GithubAdapter
 import com.project.androidquiz.databinding.ActivityFavoriteBinding
 import com.project.androidquiz.interfaces.DbListener
 import com.project.androidquiz.models.Users
+import com.project.androidquiz.repositories.State
 import com.project.androidquiz.viewmodels.GithubViewModel
 import com.project.androidquiz.viewmodels.GithubViewModelFactory
 
@@ -23,11 +25,18 @@ class FavoriteActivity:AppCompatActivity() {
         val factory = GithubViewModelFactory(ServiceLocator.instance(this))
         githubViewModel = ViewModelProvider(this,factory).get(GithubViewModel::class.java)
         initAdapter()
+        githubViewModel.ioState.observe(this, Observer {
+            when(it)
+            {
+                State.SUCCESS-> Snackbar.make(binding.root,it.status.toString(), Snackbar.LENGTH_SHORT).show()
+                else-> Snackbar.make(binding.root,it.msg!!, Snackbar.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun initAdapter()
     {
-        val adapter = GithubAdapter(this,binding.usersList,object: DbListener {
+        val adapter = GithubAdapter(this,object: DbListener {
             override fun insertUser(user: Users) {
             }
 

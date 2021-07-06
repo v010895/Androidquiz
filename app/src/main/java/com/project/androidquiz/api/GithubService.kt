@@ -23,6 +23,19 @@ interface GithubService {
     fun userDetail(
         @Path("user") user:String,
     ):Call<Users>
+
+    @GET("users/{user}/followers")
+    fun getFollowers(
+        @Path("user") user:String,
+        @Query("per_page") perPage:Int,
+        @Query("page") page:Int
+    ):Call<List<Users>>
+    @GET("users/{user}/following")
+    fun getFollowing(
+        @Path("user") user:String,
+        @Query("per_page") perPage:Int,
+        @Query("page") page:Int
+    ):Call<List<Users>>
     companion object {
         private const val BASE_URL = "https://api.github.com"
         fun create(): GithubService {

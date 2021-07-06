@@ -35,10 +35,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/bioTxt"
         app:srcCompat="@drawable/ic_person" />
 
     <TextView
@@ -54,10 +54,11 @@
         android:id="@+id/bioTxt"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:maxLines="3"
-        app:layout_constraintBottom_toBottomOf="@+id/loginImage"
-        app:layout_constraintStart_toEndOf="@+id/loginImage"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         tools:text="bio" />
 
     <ImageView
@@ -101,5 +102,45 @@
         app:layout_constraintBottom_toBottomOf="@+id/blogImage"
         app:layout_constraintStart_toEndOf="@+id/blogImage"
         app:layout_constraintTop_toTopOf="@+id/blogImage" />
+
+    <Button
+        android:id="@+id/queryFollower"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/follower"
+        android:textColor="@color/black"
+        android:background="@drawable/ic_rectangle"
+        app:layout_constraintEnd_toStartOf="@+id/queryFollowing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blogImage" />
+
+    <Button
+        android:id="@+id/queryFollowing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/following"
+        android:textColor="@color/black"
+        android:background="@drawable/ic_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/queryFollower"
+        app:layout_constraintTop_toBottomOf="@+id/blogImage" />
+
+    <TextView
+        android:id="@+id/sideAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        tools:text="sideAdmin"
+        app:layout_constraintBottom_toBottomOf="@+id/loginImage"
+        app:layout_constraintStart_toEndOf="@+id/loginImage"
+        app:layout_constraintTop_toBottomOf="@+id/loginTxt" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

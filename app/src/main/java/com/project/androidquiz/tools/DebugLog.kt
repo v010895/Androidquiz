@@ -4,10 +4,11 @@ import android.util.Log
 
 class DebugLog {
     companion object{
-        private const val enable = true
+        private const val enable = false
         fun d(tag:String, message:String)
         {
-            Log.d(tag,message)
+            if(enable)
+                Log.d(tag,message)
         }
     }
 }

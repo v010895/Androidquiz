@@ -7,4 +7,6 @@
     <string name="user_detail">User Detail</string>
     <string name="github_users">Github Users</string>
     <string name="favorite_user">Favorite User</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
 </resources>

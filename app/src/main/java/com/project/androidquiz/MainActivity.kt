@@ -13,7 +13,7 @@ import com.project.androidquiz.adapters.GithubAdapter
 import com.project.androidquiz.databinding.ActivityMainBinding
 import com.project.androidquiz.interfaces.DbListener
 import com.project.androidquiz.models.Users
-import com.project.androidquiz.repositories.NetworkState
+import com.project.androidquiz.repositories.State
 import com.project.androidquiz.viewmodels.GithubViewModel
 import com.project.androidquiz.viewmodels.GithubViewModelFactory
 
@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         githubViewModel = ViewModelProvider(this,factory).get(GithubViewModel::class.java)
         githubViewModel.networkState.observe(this, Observer {
             when(it){
-                NetworkState.LOADED->Snackbar.make(binding.root,it.status.toString(),Snackbar.LENGTH_SHORT).show()
-                NetworkState.LOADING->Snackbar.make(binding.root,it.status.toString(),Snackbar.LENGTH_SHORT).show()
+                State.SUCCESS->Snackbar.make(binding.root,it.status.toString(),Snackbar.LENGTH_SHORT).show()
+                State.LOADING->Snackbar.make(binding.root,it.status.toString(),Snackbar.LENGTH_SHORT).show()
                 else->Snackbar.make(binding.root,it.msg?:"Unknown error",Snackbar.LENGTH_SHORT).show()
             }
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
     private fun initAdapter(){
-        val adapter = GithubAdapter(this,binding.usersList,object:DbListener{
+        val adapter = GithubAdapter(this,object:DbListener{
             override fun insertUser(user: Users) {
                 githubViewModel.insertUser(user)
             }

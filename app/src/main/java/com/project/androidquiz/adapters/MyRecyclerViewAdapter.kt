@@ -1,12 +1,8 @@
 package com.project.androidquiz.adapters
 
-import android.os.Debug
 import android.view.*
-import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
-import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +12,7 @@ import com.project.androidquiz.models.Users
 import com.project.androidquiz.tools.DebugLog
 import java.util.*
 
-abstract class MyRecyclerViewAdapter(val activity:AppCompatActivity,val recyclerView: RecyclerView,
+abstract class MyRecyclerViewAdapter(val activity:AppCompatActivity,
                                      val itemClick: (Any) -> Unit) : PagedListAdapter<Users,MyRecyclerViewAdapter.ViewHolder>(
     DIFF_CALLBACK) {
     protected val layoutInflater = activity.layoutInflater

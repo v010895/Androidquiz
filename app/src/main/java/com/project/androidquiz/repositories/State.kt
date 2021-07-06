@@ -16,6 +16,11 @@
 
 package com.project.androidquiz.repositories
 
+enum class QueryType{
+    FOLLOWER,
+    FOLLOWING
+}
+
 enum class Status {
     RUNNING,
     SUCCESS,
@@ -23,12 +28,12 @@ enum class Status {
 }
 
 @Suppress("DataClassPrivateConstructor")
-data class NetworkState private constructor(
+data class State private constructor(
     val status: Status,
     val msg: String? = null) {
     companion object {
-        val LOADED = NetworkState(Status.SUCCESS)
-        val LOADING = NetworkState(Status.RUNNING)
-        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
+        val SUCCESS = State(Status.SUCCESS)
+        val LOADING = State(Status.RUNNING)
+        fun error(msg: String?) = State(Status.FAILED, msg)
     }
 }
