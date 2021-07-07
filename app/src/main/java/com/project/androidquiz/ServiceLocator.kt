@@ -9,18 +9,24 @@ import java.util.concurrent.Executors
 object ServiceLocator {
 
     var INSTANCE: GithubRepository? = null
+    val LOCK = Any()
     private val api by lazy{
         GithubService.create()
     }
 
     private val NETWORK_IO = Executors.newFixedThreadPool(5)
     fun instance(context: Context): GithubRepository {
-        return INSTANCE ?: createRepository(context,api)
+        synchronized(LOCK)
+        {
+            return INSTANCE ?: createRepository(context, api)
+        }
     }
     private fun createRepository(context:Context,api:GithubService):GithubRepository
     {
         val db = GithubDatabase.getInstance(context)
-        return GithubRepository(api,db, NETWORK_IO,)
+        val githubRepository = GithubRepository(api,db, NETWORK_IO)
+        INSTANCE = githubRepository
+        return githubRepository
     }
 
 }
